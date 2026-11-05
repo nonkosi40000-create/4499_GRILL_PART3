@@ -35,7 +35,27 @@ The app features Firebase-backed authentication and **Single Sign-On (SSO)**, al
 *   **Media storage:** Firebase Storage is used as blob/object storage for app media, including food imagery and user-uploaded community content.
 
 ### 8. Automated Testing
-*   **Validation:** Automated tests have been implemented and executed to validate app functionality, user flows, and reliability across core features.
+Automated tests cover shared business logic, input validation, data models, and key user interface flows. The test implementation includes:
+
+#### Input Validation & Utility Components
+*   `ValidationUtils.kt` centralizes email and password validation logic for authentication.
+*   `CartManager.kt` includes helper methods (`removeItem`, `updateQuantity`, and `getItemCount`) to support unit testing.
+*   `RegisterActivity.kt` uses `ValidationUtils` for registration input validation.
+
+#### Local Unit Tests (`app/src/test/java/com/example/a4499grill/`)
+*   `CartManagerTest.kt` tests item addition, quantity updates, removal, clearing, price totals, and item counting.
+*   `ValidationUtilsTest.kt` tests valid and invalid email patterns, password complexity requirements, and full form validation.
+*   `ModelsTest.kt` tests constructors, default values, and data structures for `CartItem`, `Order`, `CommunityPost`, and `Comment`.
+
+#### Instrumented UI Tests (`app/src/androidTest/java/com/example/a4499grill/`)
+*   `SplashActivityTest.kt` validates splash screen branding text and elements.
+*   `MainActivityTest.kt` validates sign-in fields, button interactions, and soft keyboard input.
+*   `RegisterActivityTest.kt` validates registration form inputs, spinner selection, and empty-submission handling.
+*   `CartActivityTest.kt` validates the cart display header, totals, and empty basket checkout interactions.
+
+#### Coverage & Documentation
+*   JaCoCo test coverage is configured in `build.gradle.kts`.
+*   Testing documentation is available in [`docs/testing.md`](docs/testing.md) and linked from `AGENTS.md`.
 
 ---
 
@@ -76,7 +96,7 @@ The app features Firebase-backed authentication and **Single Sign-On (SSO)**, al
 2.  **Serverless Real-Time Sync:** Firestore snapshot listeners keep relevant data, including order status, updated in real time.
 3.  **Inclusive, Multilingual Experience:** English, Afrikaans, and isiZulu support extends to the AI chatbot, helping users engage with the app in their preferred language.
 4.  **Flexible Authentication and Media:** Single Sign-On simplifies access, while Firebase Storage provides blob/object storage for app and community media.
-5.  **Quality Assurance:** Automated testing has been completed to support reliability and confirm core app functions work as expected.
+5.  **Quality Assurance:** Automated unit and instrumented UI tests cover validation logic, cart behavior, data models, and key app flows. JaCoCo supports test coverage reporting.
 6.  **Hybrid Logic:** The app uses a local-first fallback strategy so the interface can remain useful when cloud services are unavailable.
 
 ---
@@ -90,7 +110,7 @@ The app features Firebase-backed authentication and **Single Sign-On (SSO)**, al
 *   **Glide:** Image loading, cropping, and memory-efficient caching.
 *   **Material Design 3:** UI components and patterns designed for accessibility and usability.
 *   **Android localization resources:** Supports English, Afrikaans, and isiZulu across the app, including the chatbot experience.
-*   **Automated Testing:** Included as part of the verification and quality assurance process.
+*   **Automated Testing:** Local unit tests, instrumented UI tests, and JaCoCo coverage configuration.
 
 ---
 *Developed for 4499GRILL - Premium Taste, Digital Precision.*
