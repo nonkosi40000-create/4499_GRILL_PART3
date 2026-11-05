@@ -1,32 +1,37 @@
 # 4499GRILL - Premium Wood-Fired Experience
 
-4499GRILL is a cutting-edge Android application designed for a premium wood-fired grill restaurant. It transcends traditional food ordering by integrating social community features, AI-driven recommendations, and a robust real-time order management system. Built with Kotlin and powered by Firebase, the app provides a seamless, high-performance experience from the first flame to the final delivery.
+4499GRILL is a cutting-edge Android application designed for a premium wood-fired grill restaurant. It goes beyond traditional food ordering by combining social community features, AI-driven recommendations, real-time order updates, and a multilingual experience.
 
 ## 🚀 Key Features & Deep Dive
 
 ### 1. Smart Authentication & Role Management
-The app features a secure, Firebase-backed authentication system supporting **Multi-Role Dashboards**:
+The app features Firebase-backed authentication and **Single Sign-On (SSO)**, alongside support for multiple user roles:
 *   **Customers:** Access to ordering, community, and personal history.
 *   **Workers & Managers:** Specialized interfaces for order processing and restaurant oversight.
-*   **Logic:** Users are verified upon sign-in, and the app dynamically routes them to the appropriate dashboard based on their verified role in Firestore.
+*   **Role-based routing:** After sign-in, users are routed to the appropriate dashboard according to their verified role in Firestore.
 
 ### 2. Intelligent Menu & Customization
 *   **Dynamic Discovery:** High-performance menu rendering using Glide for image caching.
-*   **Precision Customization:** Users don't just pick an item; they build it. The `ItemDetailActivity` supports required selections (like patty type) and optional add-ons, recalculating totals in real-time.
+*   **Precision Customization:** The `ItemDetailActivity` supports required selections (such as patty type) and optional add-ons, recalculating totals as users customize their meals.
 
-### 3. AI-Powered Concierge
-*   **Indecision Solver:** Integrated AI Chat Assistant that suggests meals based on user cravings and preferences. It bridges the gap between a static menu and a personalized dining consultation.
+### 3. AI-Powered, Multilingual Concierge
+*   **Personalized recommendations:** The integrated AI chat assistant suggests meals based on users' cravings and preferences.
+*   **Chat in your language:** The chatbot supports **English, Afrikaans, and isiZulu**, allowing users to interact with the assistant in their selected language.
 
 ### 4. Community Hub (Social Dining)
-*   **Social Interaction:** A full social feed where users can post their meals, rate dishes with a 5-star system, and leave comments.
-*   **Social Proof:** Real-time like counters and community ratings help new users discover the best "Flame-Grilled Masterpieces."
+*   **Social Interaction:** A social feed where users can post their meals, rate dishes with a 5-star system, and leave comments.
+*   **Social Proof:** Like counters and community ratings help users discover popular dishes.
 
 ### 5. Advanced Order & Payment System
-*   **Multi-Select Payments:** The `OrdersActivity` allows users to view their entire history and select multiple "Awaiting Payment" orders to pay concurrently—a significant efficiency upgrade over traditional one-by-one checkouts.
-*   **Live Tracking:** Powered by Firestore Snapshots, order status updates (Received -> Grilling -> Delivered) reflect instantly without refreshing the page.
+*   **Multi-Select Payments:** The `OrdersActivity` allows users to view their order history and select multiple "Awaiting Payment" orders to pay concurrently.
+*   **Live Tracking:** Firestore snapshot listeners keep order status updates (Received -> Grilling -> Delivered) in sync without requiring a manual refresh.
 
-### 6. Personalization & Accessibility
-*   **Theme Control:** Full Dark Mode and Light Mode support, controllable via a toggle in the Profile settings. The preference is persistent across app launches using SharedPreferences.
+### 6. Personalization, Language & Accessibility
+*   **Multilingual interface:** The app supports **English, Afrikaans, and isiZulu**. Users can use the app and chatbot in their preferred supported language.
+*   **Theme Control:** Dark Mode and Light Mode are available through the Profile settings. The preference is saved across app launches using SharedPreferences.
+
+### 7. Firebase Blob Storage
+*   **Media storage:** Firebase Storage is used as blob/object storage for app media, including food imagery and user-uploaded community content.
 
 ---
 
@@ -37,7 +42,7 @@ The app features a secure, Firebase-backed authentication system supporting **Mu
 ├── app
 │   ├── src/main/java/com/example/a4499grill
 │   │   ├── SplashActivity.kt        (App Entry & Theme Loading)
-│   │   ├── MainActivity.kt          (Secure Login)
+│   │   ├── MainActivity.kt          (Sign-In, including SSO)
 │   │   ├── RegisterActivity.kt      (Account Creation)
 │   │   ├── HomeActivity.kt          (Dashboard & Favorites)
 │   │   ├── MenuActivity.kt          (Full Menu Discovery)
@@ -45,14 +50,16 @@ The app features a secure, Firebase-backed authentication system supporting **Mu
 │   │   ├── CartActivity.kt          (Basket Management)
 │   │   ├── OrdersActivity.kt        (History & Multi-Payment)
 │   │   ├── CommunityActivity.kt     (Social Feed & Interaction)
-│   │   ├── AIChatActivity.kt        (AI Recommendation Engine)
-│   │   ├── ProfileActivity.kt       (Settings & Theme Control)
+│   │   ├── AIChatActivity.kt        (Multilingual AI Recommendations)
+│   │   ├── ProfileActivity.kt       (Settings, Language & Theme Control)
 │   │   ├── Models.kt                (Data Structures: Order, Post, User)
 │   │   └── CartManager.kt           (Singleton Basket Logic)
 │   └── src/main/res
 │       ├── layout/                      (UI XML Definitions)
 │       ├── drawable/                    (Vector Icons & PNG Assets)
-│       ├── values/                      (Colors, Strings, Light Theme)
+│       ├── values/                      (Default Strings, Colors & Light Theme)
+│       ├── values-af/                   (Afrikaans Resources)
+│       ├── values-zu/                   (isiZulu Resources)
 │       └── values-night/                (Premium Dark Theme)
 └── build.gradle                         (Project Dependencies)
 ```
@@ -61,22 +68,23 @@ The app features a secure, Firebase-backed authentication system supporting **Mu
 
 ## 💎 What Makes This App Unique?
 
-1.  **The "Social Grill":** Most food apps are transactional. 4499GRILL is social. By allowing users to rate and comment on specific grill sessions, it creates a community around the brand.
-2.  **Serverless Real-Time Sync:** By leveraging Firebase Firestore's `SnapshotListeners`, the app eliminates "pull-to-refresh." Data flows like water—when a chef starts grilling, the customer's phone vibrates instantly.
-3.  **Hybrid Logic:** The app uses a "Local-First" fallback strategy. If the cloud is unreachable, the app provides high-quality mock content to ensure the UI remains vibrant and functional.
+1.  **The "Social Grill":** 4499GRILL combines food ordering with a community where users can rate and comment on their dining experiences.
+2.  **Serverless Real-Time Sync:** Firestore snapshot listeners keep relevant data, including order status, updated in real time.
+3.  **Inclusive, Multilingual Experience:** English, Afrikaans, and isiZulu support extends to the AI chatbot, helping users engage with the app in their preferred language.
+4.  **Flexible Authentication and Media:** Single Sign-On simplifies access, while Firebase Storage provides blob/object storage for app and community media.
+5.  **Hybrid Logic:** The app uses a local-first fallback strategy so the interface can remain useful when cloud services are unavailable.
 
 ---
 
 ## 🛠 Tech Stack: SDKs & APIs
 
-Because this project is linked directly to the **Firebase Ecosystem**, we utilize a suite of powerful Google Cloud APIs:
-
-*   **Android SDK (Kotlin):** The foundation for high-performance, modern mobile development.
-*   **Firebase Authentication:** Handles secure credential management and OAuth handshakes.
-*   **Cloud Firestore (NoSQL):** Stores all order, user, and community data with real-time synchronization.
-*   **Firebase Storage:** Used for hosting and serving high-resolution food imagery and user-uploaded community content.
-*   **Glide API:** For sophisticated image loading, circular cropping, and memory-efficient caching.
-*   **Material Design 3:** To ensure the UI adheres to the latest Google design standards for accessibility and aesthetics.
+*   **Android SDK (Kotlin):** The foundation for modern Android development.
+*   **Firebase Authentication:** Supports secure sign-in, including Single Sign-On.
+*   **Cloud Firestore (NoSQL):** Stores app data and supports real-time synchronization.
+*   **Firebase Storage:** Blob/object storage for food imagery and user-uploaded community media.
+*   **Glide:** Image loading, cropping, and memory-efficient caching.
+*   **Material Design 3:** UI components and patterns designed for accessibility and usability.
+*   **Android localization resources:** Supports English, Afrikaans, and isiZulu across the app, including the chatbot experience.
 
 ---
 *Developed for 4499GRILL - Premium Taste, Digital Precision.*
