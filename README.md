@@ -1,6 +1,6 @@
 # 4499GRILL - Premium Wood-Fired Experience
 
-4499GRILL is a cutting-edge Android application designed for a premium wood-fired grill restaurant. It goes beyond traditional food ordering by combining social community features, AI-driven recommendations, real-time order updates, and a multilingual experience.
+4499GRILL is a cutting-edge Android application designed for a premium wood-fired grill restaurant. It goes beyond traditional food ordering by combining social community features, AI-driven recommendations, real-time order updates, multilingual accessibility, and secure cloud integration.
 
 ## 🚀 Key Features & Deep Dive
 
@@ -17,6 +17,7 @@ The app features Firebase-backed authentication and **Single Sign-On (SSO)**, al
 ### 3. AI-Powered, Multilingual Concierge
 *   **Personalized recommendations:** The integrated AI chat assistant suggests meals based on users' cravings and preferences.
 *   **Chat in your language:** The chatbot supports **English, Afrikaans, and isiZulu**, allowing users to interact with the assistant in their selected language.
+*   **Works within the chatbot:** The multilingual experience is applied not only to the app interface but also to the recommendation and conversation flow within the chatbot.
 
 ### 4. Community Hub (Social Dining)
 *   **Social Interaction:** A social feed where users can post their meals, rate dishes with a 5-star system, and leave comments.
@@ -32,6 +33,9 @@ The app features Firebase-backed authentication and **Single Sign-On (SSO)**, al
 
 ### 7. Firebase Blob Storage
 *   **Media storage:** Firebase Storage is used as blob/object storage for app media, including food imagery and user-uploaded community content.
+
+### 8. Automated Testing
+*   **Validation:** Automated tests have been implemented and executed to validate app functionality, user flows, and reliability across core features.
 
 ---
 
@@ -72,7 +76,8 @@ The app features Firebase-backed authentication and **Single Sign-On (SSO)**, al
 2.  **Serverless Real-Time Sync:** Firestore snapshot listeners keep relevant data, including order status, updated in real time.
 3.  **Inclusive, Multilingual Experience:** English, Afrikaans, and isiZulu support extends to the AI chatbot, helping users engage with the app in their preferred language.
 4.  **Flexible Authentication and Media:** Single Sign-On simplifies access, while Firebase Storage provides blob/object storage for app and community media.
-5.  **Hybrid Logic:** The app uses a local-first fallback strategy so the interface can remain useful when cloud services are unavailable.
+5.  **Quality Assurance:** Automated testing has been completed to support reliability and confirm core app functions work as expected.
+6.  **Hybrid Logic:** The app uses a local-first fallback strategy so the interface can remain useful when cloud services are unavailable.
 
 ---
 
@@ -85,6 +90,7 @@ The app features Firebase-backed authentication and **Single Sign-On (SSO)**, al
 *   **Glide:** Image loading, cropping, and memory-efficient caching.
 *   **Material Design 3:** UI components and patterns designed for accessibility and usability.
 *   **Android localization resources:** Supports English, Afrikaans, and isiZulu across the app, including the chatbot experience.
+*   **Automated Testing:** Included as part of the verification and quality assurance process.
 
 ---
 *Developed for 4499GRILL - Premium Taste, Digital Precision.*
